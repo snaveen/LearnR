@@ -1,7 +1,6 @@
 package com.learnr.core.classification;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -40,7 +39,7 @@ public class GeneratingMatrixfromMaps {
 	 * @param map
 	 * @return
 	 */
-	public static List<Map<String, Integer>> creatingMapPoints(Map<String, Integer> map) {
+	public static List<Map<String, Integer>> addingMapPoints(Map<String, Integer> map) {
 		List<Map<String, Integer>> maps = new ArrayList<Map<String, Integer>>();
 		maps.add(map);
 		return maps;

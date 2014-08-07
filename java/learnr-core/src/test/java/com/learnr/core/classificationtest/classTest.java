@@ -12,7 +12,6 @@ public class classTest {
 
 	public static void main(String[] args) throws IOException {
 		dataMapper data = new dataMapper();
-
 		LogReg.trainModel(data.getVectorsAndTargetValues(filename, 12), 12, 3);
 		// LogReg.test(LogReg.convertTestfile(filename1));
 	}
