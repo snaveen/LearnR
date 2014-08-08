@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GeneratingVectorsForClassification {
+public class GeneratingVectors {
 
 	private List<ArrayList<String>> listOfMapKeysToListOfStrings(List<Map<String, Integer>> listOfMaps) {
 		List<ArrayList<String>> listOfStrings = new ArrayList<ArrayList<String>>();
@@ -25,7 +25,7 @@ public class GeneratingVectorsForClassification {
 		return listOfIntegers;
 	}
 
-	public List<Map<String, Integer>> dimensionVector1(List<Map<String, Integer>> listOfMaps) {
+	public List<Map<String, Integer>> dimensionVector(List<Map<String, Integer>> listOfMaps) {
 		List<Map<String, Integer>> list = new ArrayList<Map<String, Integer>>();
 		List<ArrayList<String>> listOfStrings = new ArrayList<ArrayList<String>>();
 		List<ArrayList<Integer>> listOfIntegers = new ArrayList<ArrayList<Integer>>();

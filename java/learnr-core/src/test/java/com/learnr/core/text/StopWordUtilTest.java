@@ -25,7 +25,7 @@ public class StopWordUtilTest {
 		list.add(map1);
 		list.add(map2);
 		 StopWordUtil sw = new  StopWordUtil();
-		 stopwords= sw.StopWords(list);
+		 stopwords= sw.stopWords(list);
 		Assert.assertEquals(true, stopwords.contains("a"));
 	}
 	@Test
@@ -46,7 +46,7 @@ public class StopWordUtilTest {
 		Map<String , Integer> map1 = new HashMap<String,Integer>(); 
 		Map<String , Integer> map2 = new HashMap<String,Integer>(); 
 		Map<String , Integer> finalmap = new HashMap<String,Integer>(); 
-		List<Map> list = new ArrayList<Map>();
+		List<Map<String,Integer>> list = new ArrayList<Map<String,Integer>>();
 		List<String> stopwords = new ArrayList<String>();
 		map1.put("a", 1);
 		map1.put("b", 2);
@@ -58,7 +58,7 @@ public class StopWordUtilTest {
 		list.add(map2);
 		stopwords.add("a");
 		StopWordUtil sw = new  StopWordUtil();
-		finalmap = sw.getMap(list, stopwords);
+		finalmap = sw.getWordCount(list, stopwords);
 		Assert.assertEquals(4, finalmap.size());
 	}
 	@Test
