@@ -24,7 +24,7 @@ public class ClusterDocuments {
 	
 	// Utility Classes used
 	private Lemmatizer lemmatizer;
-	private StopWordUtil stopWordUtil;
+	private StopWords stopWordUtil;
 	private ClustersGenerator clusterGenerator;
 	
 	private final String PATENT_DESC1 = "Patent based on Agriculture and farming related stuffs.";
@@ -36,7 +36,7 @@ public class ClusterDocuments {
 	@Before
 	public void init() {
 		lemmatizer = new Lemmatizer();
-		stopWordUtil = new StopWordUtil();
+		stopWordUtil = new StopWords();
 		
 	}
 
@@ -81,7 +81,7 @@ public class ClusterDocuments {
 		patentCorpus.add(patentMap5);
 		
 		// Generate List of all the stop words
-		List<String> stopWordsGenerated = stopWordUtil.StopWords(patentCorpus);
+		List<String> stopWordsGenerated = stopWordUtil.findStopWords(patentCorpus);
 		
 		List<Map<String, Integer>> termVectorList = stopWordUtil.dimensionVector(patentCorpus);
 		

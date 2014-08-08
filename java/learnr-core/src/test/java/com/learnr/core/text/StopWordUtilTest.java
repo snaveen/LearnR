@@ -24,8 +24,8 @@ public class StopWordUtilTest {
 		map2.put("a", 3);
 		list.add(map1);
 		list.add(map2);
-		 StopWordUtil sw = new  StopWordUtil();
-		 stopwords= sw.stopWords(list);
+		 StopWords sw = new  StopWords();
+		 stopwords= sw.findStopWords(list);
 		Assert.assertEquals(true, stopwords.contains("a"));
 	}
 	@Test
@@ -36,7 +36,7 @@ public class StopWordUtilTest {
 		list.add("c");
 		list.add("a");
 		list.add("b");
-		 StopWordUtil sw = new  StopWordUtil();
+		 StopWords sw = new  StopWords();
 		 map = sw.getWordCount(list);
 		 int a = map.get("a");
 		 Assert.assertEquals(2, a);
@@ -57,7 +57,7 @@ public class StopWordUtilTest {
 		list.add(map1);
 		list.add(map2);
 		stopwords.add("a");
-		StopWordUtil sw = new  StopWordUtil();
+		StopWords sw = new  StopWords();
 		finalmap = sw.getWordCount(list, stopwords);
 		Assert.assertEquals(4, finalmap.size());
 	}
@@ -68,7 +68,7 @@ public class StopWordUtilTest {
 		map2.put("d", 2);
 		map2.put("e", 1);
 		map2.put("a", 3);
-		StopWordUtil sw = new  StopWordUtil();
+		StopWords sw = new  StopWords();
 		list = sw.mapTolist(map2);
 		Assert.assertEquals(6, list.size());
 		
@@ -86,7 +86,7 @@ public class StopWordUtilTest {
 		map2.put("e",1);
 		list.add(map1);
 		list.add(map2);
-		StopWordUtil st = new StopWordUtil();
+		StopWords st = new StopWords();
 		finallist=st.dimensionVector(list);
 		Assert.assertEquals(4, finallist.get(0).size());
 		Assert.assertEquals(4, finallist.get(1).size());

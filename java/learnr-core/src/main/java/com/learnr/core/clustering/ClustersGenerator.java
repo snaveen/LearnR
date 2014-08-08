@@ -23,11 +23,18 @@ public class ClustersGenerator {
 
 	private static final Logger logger = LoggerFactory.getLogger(ClustersGenerator.class);
 
-	private final RealMatrix data;
 	private final List<Clusterable> points;
-
+	private RealMatrix data;
+	
 	/* --- Constructors --- */
+	
+	public ClustersGenerator(List<Clusterable> points) {
+		super();
+		Verify.notNull(points);
 
+		this.points = points;
+	}
+	
 	public ClustersGenerator(RealMatrix data) {
 		super();
 		Verify.notNull(data);

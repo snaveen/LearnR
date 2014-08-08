@@ -1,6 +1,5 @@
 package com.learnr.core.text;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -17,7 +16,7 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class Lemmatizer {
 	
-	private StanfordCoreNLP pipeline;
+	private static StanfordCoreNLP pipeline;
 	
 	public Lemmatizer() {
 		Properties props;
@@ -26,10 +25,10 @@ public class Lemmatizer {
 
 	    // StanfordCoreNLP loads a lot of models, so you probably
 	    // only want to do this once per execution
-	    this.pipeline = new StanfordCoreNLP(props);
+	    pipeline = new StanfordCoreNLP(props);
 	}
 
-	public  List<String> lemmatize(String inStr) {
+	public static List<String> lemmatize(String inStr) {
 		Verify.hasLength(inStr);
 
 		List<String> lemmas = new LinkedList<String>();
@@ -38,7 +37,7 @@ public class Lemmatizer {
 	    Annotation document = new Annotation(inStr);
 
 	    // run all Annotators on this text
-	    this.pipeline.annotate(document);
+	    pipeline.annotate(document);
 
 	    // Iterate over all of the sentences found
 	    List<CoreMap> sentences = document.get(SentencesAnnotation.class);
