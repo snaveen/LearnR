@@ -29,7 +29,7 @@ public class Lemmatizer {
 	    this.pipeline = new StanfordCoreNLP(props);
 	}
 
-	public List<String> lemmatize(String inStr) {
+	public  List<String> lemmatize(String inStr) {
 		Verify.hasLength(inStr);
 
 		List<String> lemmas = new LinkedList<String>();
