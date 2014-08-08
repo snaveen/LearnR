@@ -2,9 +2,9 @@ package com.learnr.core.text;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StopWordUtil {
 	/**
@@ -12,7 +12,7 @@ public class StopWordUtil {
 	 * @param listOfMaps
 	 * @return List of stopwords
 	 */
-	public List<String> StopWords(List<Map> listOfMaps) {
+	public List<String> stopWords(List<Map<String, Integer>> listOfMaps) {
 		if (listOfMaps.size() == 1 || listOfMaps.size() == 0) {
 			return null;
 		} else {
@@ -42,13 +42,14 @@ public class StopWordUtil {
 		}
 	}
 
-/**
- * 
- * @param inStrs =  string
- * @return Word count in the form of a map
- */
+	/**
+	 * 
+	 * @param inStrs
+	 *            = string
+	 * @return Word count in the form of a map
+	 */
 	public Map<String, Integer> getWordCount(List<String> inStrs) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Integer> map = new TreeMap<String, Integer>();
 		int size = inStrs.size();
 		int count = 0, k = 0;
 		inStrs = covertionToLowerCase(inStrs);
@@ -74,44 +75,40 @@ public class StopWordUtil {
 	 * 
 	 * @param listOfMaps
 	 * @param stopwords
-	 * @return word count in the form of map
-	 * This method is basically to give the final total(Of all the strings) count of the words
+	 * @return word count in the form of map This method is basically to give
+	 *         the final total(Of all the strings) count of the words
 	 */
-	public  Map<String, Integer> getMap(List<Map> listOfMaps,List<String> stopwords) {
+	public Map<String, Integer> getWordCount(List<Map<String, Integer>> listOfMaps, List<String> stopwords) {
 		List<String> Words = new ArrayList<String>();
 		List<String> listOfFinalWords = new ArrayList<String>();
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Integer> map = new TreeMap<String, Integer>();
 		int size = listOfMaps.size();
-		for(int i=0;i<size;i++)
-		{
+		for (int i = 0; i < size; i++) {
 			Words = mapTolist(listOfMaps.get(i));
 			listOfFinalWords.addAll(Words);
 		}
 		Collections.sort(listOfFinalWords);
 		Collections.sort(stopwords);
-		int size1 = listOfFinalWords.size(),size2=stopwords.size();
-		for(int i=0;i<size2;i++)
-		{
-			for(int j=0;j<size1;j++)
-			{
-				while(listOfFinalWords.get(j).equals(stopwords.get(i)))
-				{
+		int size1 = listOfFinalWords.size(), size2 = stopwords.size();
+		for (int i = 0; i < size2; i++) {
+			for (int j = 0; j < size1; j++) {
+				while (listOfFinalWords.get(j).equals(stopwords.get(i))) {
 					listOfFinalWords.remove(j);
-					size1 = size1-1;
+					size1 = size1 - 1;
 				}
 			}
 		}
 		map = getWordCount(listOfFinalWords);
 		return map;
 	}
+
 	/**
 	 * 
 	 * @param listOfAllWords
 	 * @return List of words in lower case format
 	 */
-	
-	private List<String> covertionToLowerCase(List<String> listOfAllWords)
-	{
+
+	private List<String> covertionToLowerCase(List<String> listOfAllWords) {
 		String covertionToLowerCase;
 		int size = listOfAllWords.size();
 		for (int i = 0; i < size; i++) {
@@ -121,27 +118,83 @@ public class StopWordUtil {
 		}
 		return listOfAllWords;
 	}
+
 	/**
 	 * 
 	 * @param listOfAllWords
-	 * @return List of words 
-	 * this method is to convert map to a list which containing a same word as many times as key value in map
+	 * @return List of words this method is to convert map to a list which
+	 *         containing a same word as many times as key value in map
 	 */
-	
-	public static List<String> mapTolist(Map<String,Integer> map){
+
+	public List<String> mapTolist(Map<String, Integer> map) {
 		List<String> list = new ArrayList<String>(map.keySet());
 		List<Integer> integer = new ArrayList<Integer>(map.values());
 		List<String> finalList = new ArrayList<String>();
-		int size = list.size(),k;
-		for(int i=0;i<size;i++)
-		{
+		int size = list.size(), k;
+		for (int i = 0; i < size; i++) {
 			k = integer.get(i);
-			for(int j=0;j<k;j++)
-			{
+			for (int j = 0; j < k; j++) {
 				finalList.add(list.get(i));
 			}
 		}
-		
+
 		return finalList;
+	}
+
+	/**
+	 * converts every map to have same dimensions
+	 * 
+	 * @param listOfMaps
+	 * @return listOfMaps
+	 */
+	public List<Map<String, Integer>> dimensionVector(List<Map<String, Integer>> listOfMaps) {
+		int size = listOfMaps.size();
+		Map<String, Integer> bigMap = new TreeMap<String, Integer>();
+		for (int i = 0; i < size; i++) {
+			bigMap.putAll(listOfMaps.get(i));
+		}
+		List<String> biglist = new ArrayList<String>(bigMap.keySet());
+		List<String> smalllist = new ArrayList<String>();
+		int count;
+		for (int i = 0; i < listOfMaps.size(); i++) {
+			smalllist.addAll(listOfMaps.get(i).keySet());
+			for (int j = 0; j < biglist.size(); j++) {
+				count = 0;
+				for (int k = 0; k < smalllist.size(); k++) {
+					if (smalllist.get(k).equals(biglist.get(j))) {
+						break;
+					} else {
+						count = count + 1;
+					}
+				}
+				if (count == smalllist.size()) {
+					listOfMaps.get(i).put(biglist.get(j), 0);
+				}
+			}
+			smalllist.clear();
+		}
+		return listOfMaps;
+	}
+
+	public List<Map<String, Integer>> generateWordCount(List<Map<String, Integer>> list, List<String> stopwords) {
+		List<ArrayList<String>> listOfStrings = new ArrayList<ArrayList<String>>();
+		List<ArrayList<Integer>> listOfIntegers = new ArrayList<ArrayList<Integer>>();
+		for (int i = 0; i < list.size(); i++) {
+			ArrayList<String> keys = new ArrayList<String>(list.get(i).keySet());
+			listOfStrings.add(keys);
+			ArrayList<Integer> values = new ArrayList<Integer>(list.get(i).values());
+			listOfIntegers.add(values);
+		}
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < stopwords.size(); j++) {
+				List<String> keyslist = new ArrayList<String>(list.get(i).keySet());
+				for (int k = 0; k < keyslist.size(); k++) {
+					if (keyslist.get(k).equals(stopwords.get(j))) {
+						list.get(i).remove(stopwords.get(j));
+					}
+				}
+			}
+		}
+		return list;
 	}
 }

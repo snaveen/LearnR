@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 
 import com.learnr.core.RealDataPoint;
 import com.learnr.core.RealDataSet;
-import com.learnr.core.util.Verify;
-import com.learnr.core.util.ds.LabeledRealMatrix;
+import com.learnr.core.ds.LabeledRealMatrix;
+import com.learnr.util.Verify;
 
 public class ClustersGenerator {
 
@@ -56,7 +56,7 @@ public class ClustersGenerator {
 
 	public List<CentroidCluster<Clusterable>> clusterUsingKMeansPlusPlus(int noOfClusters) {
 		Verify.notNull(noOfClusters);
-		Verify.isTrue(noOfClusters == 0);
+		//Verify.isTrue(noOfClusters == 0);
 		
 		// Kmeans Clustering
 		KMeansPlusPlusClusterer<Clusterable> kMeansClusterer = new KMeansPlusPlusClusterer<Clusterable>(noOfClusters);

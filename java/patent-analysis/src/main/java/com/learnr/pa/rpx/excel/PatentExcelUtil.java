@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.learnr.pa.beans.PatentBean;
+import com.learnr.pa.bean.PatentBean;
 
 public class PatentExcelUtil {
 
@@ -33,6 +33,7 @@ public class PatentExcelUtil {
 
 	private static Map<PatentExcelType, String> fileNameMap;
 	private static String SAMPLE_FILE_PATH = "sample-files-rpx/";
+	
 	/* Static Initialization */
 
 	static {
