@@ -66,7 +66,7 @@ public class Corpus<I> {
 		// whole stop word set
 		Set<String> stopWords = new HashSet<String>();
 		stopWords.addAll(corpusStopWords);
-		stopWords.addAll(StopWords.STANDARD_STOP_WORDS);
+		stopWords.addAll(StopWords.STANDARD_STOPWORDS);
 		
 		// Final dimension vector
 		dimensionVector.addAll(vocabulary);
