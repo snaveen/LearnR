@@ -63,7 +63,7 @@ public class ClustersGenerator {
 
 	public List<CentroidCluster<Clusterable>> clusterUsingKMeansPlusPlus(int noOfClusters) {
 		Verify.notNull(noOfClusters);
-		//Verify.isTrue(noOfClusters == 0);
+		Verify.isTrue(noOfClusters > 0);
 		
 		// Kmeans Clustering
 		KMeansPlusPlusClusterer<Clusterable> kMeansClusterer = new KMeansPlusPlusClusterer<Clusterable>(noOfClusters);
@@ -75,8 +75,8 @@ public class ClustersGenerator {
 	
 	public List<CentroidCluster<Clusterable>> clusterUsingMultipleKMeansPlusPlus(int noOfClusters, int noOfTrials) {
 		Verify.notNull(noOfClusters, noOfTrials);
-		Verify.isTrue(noOfClusters == 0);
-		Verify.isTrue(noOfTrials == 0);
+		Verify.isTrue(noOfClusters > 0);
+		Verify.isTrue(noOfTrials > 0);
 		
 		// K means Clusterer
 		KMeansPlusPlusClusterer<Clusterable> kMeansClusterer = new KMeansPlusPlusClusterer<Clusterable>(noOfClusters);
@@ -91,8 +91,8 @@ public class ClustersGenerator {
 
 	public List<CentroidCluster<Clusterable>> clusterUsingFuzzyKMeans(int noOfClusters, double fuzzinessFactor) {
 		Verify.notNull(noOfClusters, fuzzinessFactor);
-		Verify.isTrue(noOfClusters == 0);
-		Verify.isTrue(fuzzinessFactor == 0);
+		Verify.isTrue(noOfClusters > 0);
+		Verify.isTrue(fuzzinessFactor > 0);
 		
 		// Fuzzy Kmeans Clustering
 		FuzzyKMeansClusterer<Clusterable> fuzzyKMeansClusterer = new FuzzyKMeansClusterer<Clusterable>(noOfClusters, fuzzinessFactor);
@@ -104,8 +104,8 @@ public class ClustersGenerator {
 
 	public List<Cluster<Clusterable>> clusterUsingDBSCAN(double maxNeighbourhoodRadias, int minNeighbourhoodSize) {
 		Verify.notNull(maxNeighbourhoodRadias, minNeighbourhoodSize);
-		Verify.isTrue(maxNeighbourhoodRadias == 0);
-		Verify.isTrue(minNeighbourhoodSize == 0);
+		Verify.isTrue(maxNeighbourhoodRadias > 0);
+		Verify.isTrue(minNeighbourhoodSize > 0);
 		
 		// DBSCAN Clustering
 		DBSCANClusterer<Clusterable> dbscanClusterer = new DBSCANClusterer<Clusterable>(maxNeighbourhoodRadias, minNeighbourhoodSize);
