@@ -1,11 +1,16 @@
 package com.learnr.pa.rpx.excel;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.math3.ml.clustering.CentroidCluster;
+import org.apache.commons.math3.ml.clustering.Clusterable;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +18,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.learnr.core.clustering.ClustersGenerator;
+import com.learnr.core.text.Corpus;
+import com.learnr.core.text.StopWords;
+import com.learnr.core.text.TermFreqVector;
 import com.learnr.pa.rpx.excel.bean.PatAbstract;
 import com.learnr.util.Verify;
 import com.learnr.util.excel.GenericExcelReader;
@@ -50,13 +59,46 @@ public class PatentExcelReadTest {
 		logger.info("Total no of patents found : " + pats.size());
 		
 		Map<String, String> patAbsMap = this.getIdToAbstractTextMap(pats);
-		List<String> abs = (List<String>) patAbsMap.values();
 		
-		// Cluster them
+		Corpus<String> abstractCorpus = new Corpus<String>(patAbsMap);
+		abstractCorpus.process();
+		
+		List<String> dimenVector = abstractCorpus.getDimensionVector();
+		logger.info("dimenstion vector size : " + dimenVector.size());
+		
+		List<TermFreqVector<String>> vectors = abstractCorpus.getTermVectors();
+		ClustersGenerator clusterGen = new ClustersGenerator(vectors);
+		List<CentroidCluster<Clusterable>> clusters = clusterGen.clusterUsingMultipleKMeansPlusPlus(3, 12);
 		
 		
+		List<Clusterable> cPoints;
+		Set<String> clusterVocab;
 		
-		
+		int index = 1;
+		for (CentroidCluster<Clusterable> centroidCluster : clusters) {
+			cPoints = centroidCluster.getPoints();
+			
+			if (cPoints == null)
+				cPoints = new ArrayList<Clusterable>();
+			
+			logger.info(" ----- Details of Cluster " + index);
+			logger.info(" Size : " + cPoints.size());
+			
+			// Print cluster vocabulary
+			clusterVocab = new HashSet<String>();
+			for (Clusterable clusterable : cPoints) {
+				TermFreqVector<String> tfv = (TermFreqVector<String>) clusterable;
+				clusterVocab.addAll(tfv.getTermFrequency().keySet());
+			}
+
+			clusterVocab.removeAll(StopWords.STANDARD_STOPWORDS);
+			
+//			logger.info(" Vocabulary : " + clusterVocab);
+			logger.info(" Vocabulary size : " + clusterVocab.size());
+			
+			
+			index ++;
+		}
 		
 	}
 

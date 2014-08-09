@@ -28,11 +28,12 @@ public class ClustersGenerator {
 	
 	/* --- Constructors --- */
 	
-	public ClustersGenerator(List<Clusterable> points) {
+	@SuppressWarnings("unchecked")
+	public ClustersGenerator(List<? extends Clusterable> points) {
 		super();
 		Verify.notNull(points);
 
-		this.points = points;
+		this.points = (List<Clusterable>) points;
 	}
 	
 	public ClustersGenerator(RealMatrix data) {

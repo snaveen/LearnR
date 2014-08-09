@@ -64,33 +64,33 @@ public class ClusterDocuments {
 		
 		// Convert the Strings to List of Maps -- Change it to meaningful names
 		
-		Map<String, Integer> patentMap1 = stopWordUtil.getWordCount(patent1);
-		Map<String, Integer> patentMap2 = stopWordUtil.getWordCount(patent2);
-		Map<String, Integer> patentMap3 = stopWordUtil.getWordCount(patent3);
-		Map<String, Integer> patentMap4 = stopWordUtil.getWordCount(patent4);
-		Map<String, Integer> patentMap5 = stopWordUtil.getWordCount(patent5);
-		
-		// Cumulate them as List
-		
-		//List<Map<String, Integer>> patentCorpus = new ArrayList<>();
-		List<Map<String, Integer>> patentCorpus = new ArrayList<>();
-		patentCorpus.add(patentMap1);
-		patentCorpus.add(patentMap2);
-		patentCorpus.add(patentMap3);
-		patentCorpus.add(patentMap4);
-		patentCorpus.add(patentMap5);
-		
-		// Generate List of all the stop words
-		List<String> stopWordsGenerated = stopWordUtil.findStopWords(patentCorpus);
-		
-		List<Map<String, Integer>> termVectorList = stopWordUtil.dimensionVector(patentCorpus);
-		
-		RealMatrix realMatrix = GeneratingMatrixfromMaps.MapToMatrix(termVectorList);
-		
-		clusterGenerator = new ClustersGenerator(realMatrix);
-		
-		List<CentroidCluster<Clusterable>> clusters = clusterGenerator.clusterUsingKMeansPlusPlus(3);		
-		System.out.println("Done ... ");
+//		Map<String, Integer> patentMap1 = stopWordUtil.getWordCount(patent1);
+//		Map<String, Integer> patentMap2 = stopWordUtil.getWordCount(patent2);
+//		Map<String, Integer> patentMap3 = stopWordUtil.getWordCount(patent3);
+//		Map<String, Integer> patentMap4 = stopWordUtil.getWordCount(patent4);
+//		Map<String, Integer> patentMap5 = stopWordUtil.getWordCount(patent5);
+//		
+//		// Cumulate them as List
+//		
+//		//List<Map<String, Integer>> patentCorpus = new ArrayList<>();
+//		List<Map<String, Integer>> patentCorpus = new ArrayList<>();
+//		patentCorpus.add(patentMap1);
+//		patentCorpus.add(patentMap2);
+//		patentCorpus.add(patentMap3);
+//		patentCorpus.add(patentMap4);
+//		patentCorpus.add(patentMap5);
+//		
+//		// Generate List of all the stop words
+//		List<String> stopWordsGenerated = stopWordUtil.findStopWords(patentCorpus);
+//		
+//		List<Map<String, Integer>> termVectorList = stopWordUtil.dimensionVector(patentCorpus);
+//		
+//		RealMatrix realMatrix = GeneratingMatrixfromMaps.MapToMatrix(termVectorList);
+//		
+//		clusterGenerator = new ClustersGenerator(realMatrix);
+//		
+//		List<CentroidCluster<Clusterable>> clusters = clusterGenerator.clusterUsingKMeansPlusPlus(3);		
+//		System.out.println("Done ... ");
 		
 	}
 

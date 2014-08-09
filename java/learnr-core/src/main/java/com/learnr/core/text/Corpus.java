@@ -46,6 +46,7 @@ public class Corpus<I> {
 		TermFreqVector<I> tfVector;
 		Map<String, Integer> tf;
 
+		logger.info("Generating term frequency vectors ... ");
 		for (I i : corpus.keySet()) {
 			origText = corpus.get(i);
 			tfVector = new TermFreqVector<I>(i, origText);
@@ -62,6 +63,7 @@ public class Corpus<I> {
 
 		// Corpus stop words
 		corpusStopWords = StopWords.findStopWordsFromTermVectors(termVectors);
+		logger.info("Corpus specific stop words : " + corpusStopWords);
 		
 		// whole stop word set
 		Set<String> stopWords = new HashSet<String>();
@@ -71,6 +73,10 @@ public class Corpus<I> {
 		// Final dimension vector
 		dimensionVector.addAll(vocabulary);
 		dimensionVector.removeAll(stopWords);
+		
+//		logger.info("Corpus dimension vector : " + dimensionVector);
+		logger.info("Corpus dimension vector length : " + dimensionVector.size());
+		logger.info("Updating the term frequency vectors with the corpus dimension vector");
 		
 		// prepare term Freq vectors with dimension vector
 		for (TermFreqVector<I> tfv : termVectors) {

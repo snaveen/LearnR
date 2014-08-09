@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.learnr.util.Verify;
 
 import edu.stanford.nlp.ling.CoreAnnotations.LemmaAnnotation;
@@ -16,9 +19,11 @@ import edu.stanford.nlp.util.CoreMap;
 
 public class Lemmatizer {
 	
-	private static StanfordCoreNLP pipeline;
+	private static final Logger logger = LoggerFactory.getLogger(Lemmatizer.class);
 	
-	public Lemmatizer() {
+	private static final StanfordCoreNLP pipeline;
+	
+	static {
 		Properties props;
 	    props = new Properties();
 	    props.put("annotators", "tokenize, ssplit, pos, lemma");
@@ -27,10 +32,11 @@ public class Lemmatizer {
 	    // only want to do this once per execution
 	    pipeline = new StanfordCoreNLP(props);
 	}
-
+	
 	public static List<String> lemmatize(String inStr) {
 		Verify.hasLength(inStr);
-
+		logger.debug("Incoming String for lemmatization : " + inStr);
+		
 		List<String> lemmas = new LinkedList<String>();
 
 	    // create an empty Annotation just with the given text

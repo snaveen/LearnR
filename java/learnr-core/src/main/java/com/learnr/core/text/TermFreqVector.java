@@ -1,5 +1,6 @@
 package com.learnr.core.text;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public final class TermFreqVector<I> implements Clusterable {
 	
 	private final int calculateWordCount() {
 		int wCount = 0;
-		List<Integer> counts = (List<Integer>) termFrequency.values();
+		Collection<Integer> counts = termFrequency.values();
 		for (Integer count : counts) {
 			if(count != null)
 				wCount = wCount + count;
