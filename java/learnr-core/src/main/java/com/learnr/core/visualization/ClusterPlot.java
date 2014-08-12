@@ -16,8 +16,6 @@ import org.slf4j.LoggerFactory;
 public class ClusterPlot {
 	private static final Logger logger = LoggerFactory.getLogger(ClusterPlot.class);
 
-	
-	
 	/**
 	 * plots 2D visualization of each matrices Xth colomn feature vs Yth column
 	 * features
@@ -26,8 +24,7 @@ public class ClusterPlot {
 	 * @param xColIndex
 	 * @param yColIndex
 	 */
-	
-	
+
 	public static void plotting(List<RealMatrix> matrices, int xColIndex, int yColIndex) {
 		if (xColIndex == yColIndex)
 			throw new RuntimeException("X and Y Column indexes should be different");
@@ -51,8 +48,6 @@ public class ClusterPlot {
 		frame.setLocation(200, 150);
 		frame.setVisible(true);
 	}
-	
-	
 
 	private static Color getColor(int i) {
 		if (i == 0)
@@ -70,16 +65,14 @@ public class ClusterPlot {
 		return Color.BLUE;
 	}
 
-	
-	
 	@SuppressWarnings("null")
-	public static void clustersPlot(List<CentroidCluster<Clusterable>> clusters) {
+	public static void clustersPlot(List<CentroidCluster<Clusterable>> clusters, int xColIndex, int yColIndex) {
 		CentroidCluster<Clusterable> cluster;
 		Plot2DPanel plot = new Plot2DPanel();
 		for (int i = 0; i < clusters.size(); i++) {
 			cluster = clusters.get(i);
 			if (cluster != null || cluster.getPoints() != null)
-				plot = plottings(convertToMatrix(cluster), 25,24, getColor(i));
+				plot = plottings(convertToMatrix(cluster), xColIndex, yColIndex, getColor(i));
 
 		}
 		JFrame frame = new JFrame("2D PLOT");
@@ -89,17 +82,12 @@ public class ClusterPlot {
 		frame.setVisible(true);
 	}
 
-	
-	
 	private static RealMatrix convertToMatrix(CentroidCluster<Clusterable> cluster) {
-		// TODO Auto-generated method stub
 		Clusterable centerpoint = cluster.getCenter();
 		List<Clusterable> points = cluster.getPoints();
 		RealMatrix matrix = generatematrix(centerpoint, points);
 		return matrix;
 	}
-	
-	
 
 	private static Plot2DPanel plottings(RealMatrix matrix, int xColIndex, int yColIndex, Color color) {
 		double[] xdata = matrix.getColumn(xColIndex);
@@ -107,24 +95,17 @@ public class ClusterPlot {
 		return plot(xdata, ydata, color);
 	}
 
-	
-	
 	private static Plot2DPanel plot(double[] xdata, double[] ydata, Color color) {
-		// TODO Auto-generated method stub
 		Plot2DPanel plot = new Plot2DPanel();
 		for (int i = 0; i < xdata.length; i++) {
 			double[] xvalues = { xdata[0], xdata[i] };
 			double[] yvalues = { ydata[0], ydata[i] };
-			plot.addScatterPlot("Cluster Plot", color, xvalues, yvalues);
-
+			plot.addLinePlot("clusterplot", color, xvalues, yvalues);
 		}
 		return plot;
 	}
 
-	
-	
 	private static RealMatrix generatematrix(Clusterable centerpoint, List<Clusterable> points) {
-		// TODO Auto-generated method stub
 		RealMatrix matrix = new Array2DRowRealMatrix(points.size() + 1, centerpoint.getPoint().length);
 		matrix.setRow(0, centerpoint.getPoint());
 		for (int i = 0; i < points.size(); i++) {
@@ -133,8 +114,6 @@ public class ClusterPlot {
 		return matrix;
 	}
 
-	
-	
 	// public static void plot(Clusterable centerpoint, List<Clusterable>
 	// points) {
 	// // TODO Auto-generated method stub

@@ -79,8 +79,8 @@ public class PatentExcelReadTest {
 					+ calc.getDistance(calc.getPoints(vectors), calc.getIDs(vectors)).get(distance));
 		}
 		// plot
-		ClusterPlot.clustersPlot(clusters);
-		Thread.sleep(15000);
+		ClusterPlot.clustersPlot(clusters, 3, 4);
+		Thread.sleep(150000);
 
 		List<Clusterable> cPoints;
 		Set<String> clusterVocab;
