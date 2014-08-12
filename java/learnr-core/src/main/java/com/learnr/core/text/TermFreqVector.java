@@ -6,73 +6,78 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.math3.ml.clustering.Clusterable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.learnr.core.exception.LearnRException;
+import com.learnr.core.math.Distance;
 import com.learnr.util.Verify;
 
 public final class TermFreqVector<I> implements Clusterable {
+
+	private static final Logger logger = LoggerFactory.getLogger(TermFreqVector.class);
 
 	private final I id;
 	private final String originalText;
 
 	private final Map<String, Integer> termFrequency;
-	
+
 	private final int wordCount;
 	private final int distinctWordCount;
-	
+
 	private double[] point = null;
-	
+
 	/* --- Constructors --- */
-	
+
 	public TermFreqVector(I id, String originalText) {
 		super();
 		Verify.notNull(id, originalText);
-		
+
 		this.id = id;
 		this.originalText = originalText;
 		this.termFrequency = TextProcessor.getTermFrequency(originalText);
-		
+
 		// word counts
 		this.wordCount = calculateWordCount();
 		this.distinctWordCount = this.termFrequency.keySet().size();
 	}
-	
+
 	public TermFreqVector(I id, Map<String, Integer> termFrequency) {
 		super();
 		Verify.notNull(id, termFrequency);
-		
+
 		this.id = id;
 		this.originalText = null;
 		this.termFrequency = termFrequency;
-		
+
 		// word counts
 		this.wordCount = calculateWordCount();
 		this.distinctWordCount = this.termFrequency.keySet().size();
 	}
-	
+
 	/* --- Private Helpers --- */
-	
+
 	private final int calculateWordCount() {
 		int wCount = 0;
 		Collection<Integer> counts = termFrequency.values();
 		for (Integer count : counts) {
-			if(count != null)
+			if (count != null)
 				wCount = wCount + count;
 		}
-		
+
 		return wCount;
 	}
 
 	/* --- Getters and Setters --- */
-	
+
 	public I getId() {
 		return id;
 	}
 
 	public String getOriginalText() {
-		if(originalText == null)
+		if (originalText == null)
 			throw new LearnRException("Object was initialized with no original text.");
-			
+
 		return originalText;
 	}
 
@@ -87,38 +92,43 @@ public final class TermFreqVector<I> implements Clusterable {
 	public Map<String, Integer> getTermFrequency() {
 		return Collections.unmodifiableMap(termFrequency);
 	}
-	
+
 	/* --- Other Methods --- */
-	
+
 	public void updateTermDimensionVector(List<String> dimensionVector) {
 		Verify.notEmpty(dimensionVector);
-		
+
 		int length = dimensionVector.size();
 		point = new double[length];
-		
+
 		// Update the vector as per dimension vector
-		
+
 		String term;
 		Integer freq;
 		for (int i = 0; i < dimensionVector.size(); i++) {
 			term = dimensionVector.get(i);
 			freq = termFrequency.get(term);
-			
+
 			point[i] = (freq == null) ? 0 : freq;
 		}
-		
+
 	}
 
-	
+	public double getEuclideanDistanceFrom(TermFreqVector<I> vector) {
+		logger.debug("Distances detween Id :" + id + "and Id :" + vector.getId());
+		double distance = Distance.euclideanDistance(this.getPoint(), vector.getPoint());
+		logger.debug("distance" + distance);
+		return distance;
+	}
+
 	/* --- Clustering related --- */
-	
+
 	@Override
 	public double[] getPoint() {
-		if(point == null)
+		if (this.point == null)
 			throw new LearnRException("Object is not yet processed term dimension vector");
 
-		return point;
+		return this.point;
 	}
-	
-	
+
 }
