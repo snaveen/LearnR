@@ -1,4 +1,4 @@
-package com.learnr.core.plot;
+package com.learnr.util.plot;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.learnr.util.plot.Plot;
 
 public class PlotTest {
 

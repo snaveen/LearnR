@@ -1,4 +1,4 @@
-package com.learnr.core.plot;
+package com.learnr.util.plot;
 
 public class PlotException extends RuntimeException {
 

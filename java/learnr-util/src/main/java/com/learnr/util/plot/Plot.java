@@ -1,4 +1,4 @@
-package com.learnr.core.plot;
+package com.learnr.util.plot;
 
 import javax.swing.JFrame;
 

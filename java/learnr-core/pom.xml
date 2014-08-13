@@ -88,15 +88,6 @@
 			<version>${mahout.version}</version>
 		</dependency>
 		
-		<!-- JMath Plot -->
-		
-		<dependency>
-			<groupId>jmathplot</groupId>
-			<artifactId>jmathplot</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/jmathplot.jar</systemPath>
-		</dependency>
 		
 		
 		<!-- Testing : JUnit -->
