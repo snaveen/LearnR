@@ -18,14 +18,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.learnr.core.clustering.ClusterUtil;
 import com.learnr.core.clustering.ClustersGenerator;
-import com.learnr.core.clusters_storage.DistanceCalculator;
 import com.learnr.core.text.Corpus;
 import com.learnr.core.text.StopWords;
 import com.learnr.core.text.TermFreqVector;
 import com.learnr.core.text.TfIdfRealMatrix;
 import com.learnr.core.visualization.ClusterPlot;
-import com.learnr.core.visualization.Matrices;
 import com.learnr.pa.rpx.excel.bean.PatAbstract;
 import com.learnr.util.Verify;
 import com.learnr.util.excel.GenericExcelReader;
@@ -87,12 +86,12 @@ public class PatentExcelReadTest {
 		List<CentroidCluster<Clusterable>> clusters = clusterGen.clusterUsingMultipleKMeansPlusPlus(3, 12);
 
 		// calculating distances between two ids
-		DistanceCalculator calc = new DistanceCalculator();
-		calc.getDistance(calc.getPoints(vectors), calc.getIDs(vectors));
+		ClusterUtil cUtil = new ClusterUtil();
+		cUtil.getDistance(cUtil.getPoints(vectors), cUtil.getIDs(vectors));
 
-		for (double distance : calc.getDistance(calc.getPoints(vectors), calc.getIDs(vectors)).keySet()) {
+		for (double distance : cUtil.getDistance(cUtil.getPoints(vectors), cUtil.getIDs(vectors)).keySet()) {
 			logger.info("distance :" + distance + " id "
-					+ calc.getDistance(calc.getPoints(vectors), calc.getIDs(vectors)).get(distance));
+					+ cUtil.getDistance(cUtil.getPoints(vectors), cUtil.getIDs(vectors)).get(distance));
 		}
 		// plot
 		ClusterPlot.clustersPlot(clusters, 3, 4);
