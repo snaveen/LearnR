@@ -11,11 +11,10 @@
 	
 	<modules>
 		<module>news-analysis</module>
-		<module>patent-analysis</module>
 		
 		<module>learnr-core</module>
     	<module>learnr-hadoop</module>
-    <module>learnr-util</module>
+    	<module>learnr-util</module>
   </modules>
 	
 </project>
