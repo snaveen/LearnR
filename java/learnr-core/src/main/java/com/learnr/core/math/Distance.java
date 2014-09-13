@@ -1,5 +1,6 @@
 package com.learnr.core.math;
 
+import org.apache.commons.math3.ml.distance.CanberraDistance;
 import org.apache.commons.math3.ml.distance.ChebyshevDistance;
 import org.apache.commons.math3.ml.distance.EarthMoversDistance;
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
@@ -18,7 +19,7 @@ public class Distance {
 	}
 
 	public static double canberraDistance(double[] p1, double[] p2) {
-		ChebyshevDistance calc = new ChebyshevDistance();
+		CanberraDistance calc = new CanberraDistance();
 		return calc.compute(p1, p1);
 	}
 

@@ -49,7 +49,6 @@ public class StopWords {
 	/* --- Static Initializations --- */
 
 	static {
-
 		Set<String> stopwords = new HashSet<String>();
 
 		try {
@@ -74,7 +73,6 @@ public class StopWords {
 		}
 
 		STANDARD_STOPWORDS = Collections.unmodifiableSet(stopwords);
-
 		logger.info("Standard Stopwords size : " + STANDARD_STOPWORDS.size());
 	}
 
