@@ -27,8 +27,8 @@ import com.learnr.core.text.Lemmatizer;
 
 public class CountJob extends Configured implements Tool {
 
-	public static Path path = new Path("/home/cloudera/ap-sample.txt");
-	public static String output = "/home/cloudera/out/";
+	public static Path path = new Path("/home/milli/workspace/test/input/wiki.txt");
+	public static String output = "/home/milli/workspace/test/input/";
 
 	public static class MapClass extends MapReduceBase implements
 			Mapper<LongWritable, Text, Text, LongWritable> {
@@ -39,6 +39,8 @@ public class CountJob extends Configured implements Tool {
 				throws IOException {
 
 			String line = value.toString();
+			if(line == null || line.isEmpty())
+				return;
 			
 			List<String> lemmList = Lemmatizer.lemmatize(line);
 			for (String lemma : lemmList) {
