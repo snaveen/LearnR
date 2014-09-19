@@ -1,4 +1,4 @@
-package org.learnr.wordcount;
+package org.learnr.hadoop.wordcount;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -18,17 +18,17 @@ import org.apache.hadoop.mapred.Mapper;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
-import org.apache.hadoop.mapred.TextInputFormat;
+import org.apache.hadoop.mapred.SequenceFileInputFormat;
 import org.apache.hadoop.mapred.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import com.learnr.core.text.Lemmatizer;
 
-public class CountJob extends Configured implements Tool {
+public class WordCountJob extends Configured implements Tool {
 
-	public static Path path = new Path("/home/milli/workspace/test/input/wiki.txt");
-	public static String output = "/home/milli/workspace/test/input/";
+	public static Path path = new Path("/home/cloudera/input");
+	public static String output = "/home/cloudera/input/output";
 
 	public static class MapClass extends MapReduceBase implements
 			Mapper<LongWritable, Text, Text, LongWritable> {
@@ -39,9 +39,9 @@ public class CountJob extends Configured implements Tool {
 				throws IOException {
 
 			String line = value.toString();
-			if(line == null || line.isEmpty())
+			if (line == null || line.isEmpty())
 				return;
-			
+
 			List<String> lemmList = Lemmatizer.lemmatize(line);
 			for (String lemma : lemmList) {
 				output.collect(new Text(lemma.toLowerCase()), new LongWritable(1L));
@@ -57,27 +57,31 @@ public class CountJob extends Configured implements Tool {
 		public void reduce(Text key, Iterator<LongWritable> values,
 				OutputCollector<Text, LongWritable> output, Reporter reporter)
 				throws IOException {
-			// TODO Auto-generated method stub
+		
 			int sum = 0;
+			
+		
 			while (values.hasNext()) {
 				sum = (int) (sum + values.next().get());
+
 			}
+			
 			output.collect(key, new LongWritable(sum));
 		}
 	}
 
 	public int run(String[] args) throws Exception {
 		Configuration conf = new Configuration();
-		JobConf job = new JobConf(conf, CountJob.class);
+		JobConf job = new JobConf(conf, WordCountJob.class);
 		job.setJobName("WordCount");
 
-		String op = output + System.currentTimeMillis();
+		String op = output;
 		FileInputFormat.setInputPaths(job, path);
 		FileOutputFormat.setOutputPath(job, new Path(op));
 
 		job.setMapperClass(MapClass.class);
 		job.setReducerClass(ReduceClass.class);
-		job.setInputFormat(TextInputFormat.class);
+		job.setInputFormat(SequenceFileInputFormat.class);
 		job.setOutputFormat(TextOutputFormat.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(LongWritable.class);
@@ -87,7 +91,7 @@ public class CountJob extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		int res = ToolRunner.run(new Configuration(), new CountJob(), args);
+		int res = ToolRunner.run(new Configuration(), new WordCountJob(), args);
 		System.exit(res);
 	}
 }
