@@ -15,6 +15,7 @@
 		<module>learnr-core</module>
     	<module>learnr-hadoop</module>
     	<module>learnr-util</module>
+    	<module>learnr-spark</module>
   </modules>
 	
 </project>
