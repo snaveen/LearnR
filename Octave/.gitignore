@@ -3,3 +3,8 @@
 
 # for temp files
 *~
+**~
+
+# Ocate core
+*octave-core
+**octave-core
