@@ -28,5 +28,44 @@ for(i = 1:s(1))
 endfor
 
 % run db scan here
+epsv = 2.5;
+minp = 4;
+printf('Running DBSCAN with eps : %d and minPoints : %d \n', epsv, minp);
+[C, ptsC, centres] = dbscan(data', epsv, minp);
+
+% process the clusters
+cs = size(C);
+noc = length(C);
+printf('No of clusters : %d \n', noc);
+
+clenghts = zeros(1, noc);
+for(i = 1:noc)
+	clengths(1, i) = length(C{i}); 
+end
+
+% check for the cluster with max size
+[cSize, cNo] = max(clengths);
+maxClus = C{cNo}; 
+
+% redo the image
+dim = zeros(s);
+for(i = 1:cSize)
+	pix = data(maxClus(i), :);
+	dim(pix(1), pix(2)) = pix(3);
+end
+
+figure;
+imshow(Ig);
+figure;
+imshow(dim);
+
+
+
+
+
+
+
+
+
 
 
