@@ -13,7 +13,7 @@ public class FileCopier {
 		outputpath = output;
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void initiate() throws Exception {
 		CamelContext context = new DefaultCamelContext();
 		context.addRoutes(transfer(inputpath, outputpath));
 
