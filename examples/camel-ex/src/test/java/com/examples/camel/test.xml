@@ -1,0 +1,8 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+	<bean id="aggregationBean" class="com.examples.camel.Aggregation" />
+	<route id="getContent">
+		<from uri="file:hi?noop=true" />
+		<pollEnrich strategyRef="aggregationBean" uri="file:hii?noop=true" />
+		<log message="After Merge ... ${body}" />
+	</route>
+</routes>

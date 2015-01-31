@@ -1,0 +1,14 @@
+
+<routes xmlns="http://camel.apache.org/schema/spring">
+	<bean id="serviceRouting" class="com.examples.camel.ServiceRouting" />
+	<!-- here we define the  route -->
+	<route id="1">
+		<from uri="http://localhost:2000/adds" />
+		<process ref="serviceRouting" />
+	</route>
+	<route id="2">
+		<from uri="http://localhost:5000/search" />
+		<process ref="serviceRouting" />
+	</route>
+
+</routes>
