@@ -3,3 +3,8 @@
 
 # for temp files
 *~
+
+# octave specific files 
+octave-core
+**octave-core
+
