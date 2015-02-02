@@ -20,7 +20,7 @@ public class RoutingXmlTest {
 	@SuppressWarnings("deprecation")
 	public void run() throws Exception{
 		CamelContext context = new DefaultCamelContext();
-		InputStream is = getClass().getResourceAsStream("test.xml");
+		InputStream is = getClass().getResourceAsStream("routing.xml");
 		RoutesDefinition routes = context.loadRoutesDefinition(is);
 		context.addRouteDefinitions(routes.getRoutes());
 		context.start();
