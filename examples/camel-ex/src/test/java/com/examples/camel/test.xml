@@ -2,7 +2,8 @@
 	<bean id="aggregationBean" class="com.examples.camel.Aggregation" />
 	<route id="getContent">
 		<from uri="file:hi?noop=true" />
-		<pollEnrich strategyRef="aggregationBean" uri="file:hii?noop=true" />
-		<log message="After Merge ... ${body}" />
+		<aggregate strategyRef="aggregationBean" uri="file:hii?noop=true">
+			<to uri="file:hiii" />
+		</aggregate>
 	</route>
 </routes>

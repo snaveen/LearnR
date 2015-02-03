@@ -22,6 +22,7 @@ public class RoutingXmlTest {
 		CamelContext context = new DefaultCamelContext();
 		InputStream is = getClass().getResourceAsStream("routing.xml");
 		RoutesDefinition routes = context.loadRoutesDefinition(is);
+		System.out.println("hi");
 		context.addRouteDefinitions(routes.getRoutes());
 		context.start();
 		Thread.sleep(5000);
