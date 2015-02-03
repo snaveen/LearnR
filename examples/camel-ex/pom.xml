@@ -52,17 +52,22 @@
 		</dependency>
 		
 		<dependency>
-		     <groupId>org.apache.camel</groupId>
-		     <artifactId>camel-http</artifactId>
-		     <version>${camel.version}</version>
-		 </dependency>
-		 
-		 <dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
 		
+		<dependency>
+             <groupId>org.apache.camel</groupId>
+             <artifactId>camel-http</artifactId>
+             <version>${camel.version}</version>
+        </dependency>
+        
+        <dependency>
+             <groupId>org.apache.camel</groupId>
+             <artifactId>camel-jetty</artifactId>
+             <version>${camel.version}</version>
+        </dependency>
 		
 		<!--  -->
 		
