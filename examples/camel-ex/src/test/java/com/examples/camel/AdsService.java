@@ -15,7 +15,7 @@ public class AdsService {
 			public Object handle(Request request, Response response)
 					throws Exception {
 				// TODO Auto-generated method stub
-				return "[{add1:Trimer,add2:Shaving cream}]";
+				return "[{ad1:Trimmer,ad2:Shaving cream}]";
 			}
 		});
 

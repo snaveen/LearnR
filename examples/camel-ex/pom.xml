@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.8</jdk.version>
 		<mvn.compiler.plugin.version>3.1</mvn.compiler.plugin.version>
 
 		<junit.version>4.5</junit.version>
@@ -50,12 +50,30 @@
 			<version>${camel.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
+			<version>2.14.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>2.14.1</version>
+		</dependency>
+
+
+
 
 	</dependencies>
 
 	<build>
 		<plugins>
-			
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${mvn.compiler.plugin.version}</version>
@@ -66,6 +84,7 @@
 			</plugin>
 
 		</plugins>
+
 	</build>
 
 </project>
