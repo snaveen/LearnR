@@ -20,7 +20,7 @@ public class SimpleAggrStrategy extends GroupedExchangeAggregationStrategy {
     		for (int i = 0; i < list.size(); i++) {
     			String eBody = list.get(i).getIn().getBody(String.class);
     			
-    			outBody += "\"result" + i + "\":" + eBody.replace("'", "\"");
+    			outBody += "\"result" + i + "\":" + eBody;
     			if(i + 1 != list.size()) {
     				outBody += ",";
     			}

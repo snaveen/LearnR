@@ -1,10 +1,6 @@
 package com.examples.camel.apibox;
 
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
-import com.examples.camel.apibox.util.ToValidJson;
 
 public class Proxy extends RouteBuilder {
 
@@ -17,23 +13,8 @@ public class Proxy extends RouteBuilder {
 			.to("direct:customerProxy");
 
 		from("direct:customerProxy")
-			.to("http://localhost:5000/customer?bridgeEndpoint=true&throwExceptionOnFailure=false")
-			.process(new ToValidJson());
+			.to("http://localhost:5000/customer?bridgeEndpoint=true&throwExceptionOnFailure=false");
 
-		
-		
-		
-		
-		from("direct:logger").process(new Processor() {
-			
-			@Override
-			public void process(Exchange exchange) throws Exception {
-				System.out.println("logger - exchange: " +
-						exchange.getIn().getBody(String.class));
-			}
-			
-			
-		});
 
 		
 	}
