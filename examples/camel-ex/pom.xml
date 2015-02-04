@@ -20,7 +20,7 @@
 		<logback.version>1.0.7</logback.version>
 
 		<camel.version>2.14.1</camel.version>
-		
+
 		<sparkjava.version>2.1</sparkjava.version>
 	</properties>
 
@@ -50,31 +50,31 @@
 			<artifactId>camel-core</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
-		
+
 		<dependency>
-             <groupId>org.apache.camel</groupId>
-             <artifactId>camel-http</artifactId>
-             <version>${camel.version}</version>
-        </dependency>
-        
-        <dependency>
-             <groupId>org.apache.camel</groupId>
-             <artifactId>camel-jetty</artifactId>
-             <version>${camel.version}</version>
-        </dependency>
-		
-		<!--  -->
-		
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-http</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
 		<dependency>
-		    <groupId>com.sparkjava</groupId>
-		    <artifactId>spark-core</artifactId>
-		    <version>${sparkjava.version}</version>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jetty</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<!-- -->
+
+		<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>${sparkjava.version}</version>
 		</dependency>
 
 		<dependency>
@@ -93,8 +93,11 @@
 			<version>2.14.1</version>
 		</dependency>
 
-
-
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
 
 	</dependencies>
 
