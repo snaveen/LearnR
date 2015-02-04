@@ -1,4 +1,4 @@
-package com.examples.camel.util;
+package com.examples.camel.apibox.util;
 
 import java.util.List;
 
@@ -35,13 +35,6 @@ public class SimpleAggrStrategy extends GroupedExchangeAggregationStrategy {
         	System.out.println("grouped exchange property is null");
         }
 		
-	}
-	
-	@Override
-	public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-		// TODO Auto-generated method stub
-		System.out.println("aggregated called");
-		return super.aggregate(oldExchange, newExchange);
 	}
 	
 }

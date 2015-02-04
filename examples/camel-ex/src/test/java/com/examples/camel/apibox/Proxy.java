@@ -1,10 +1,10 @@
-package com.examples.camel;
+package com.examples.camel.apibox;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
-import com.examples.camel.util.ToValidJson;
+import com.examples.camel.apibox.util.ToValidJson;
 
 public class Proxy extends RouteBuilder {
 

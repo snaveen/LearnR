@@ -1,4 +1,4 @@
-package com.examples.camel;
+package com.examples.camel.apibox;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
@@ -13,7 +13,7 @@ public class App {
 	public static void main(String[] args) throws Exception {
 
 		final CamelContext cc = new DefaultCamelContext();
-
+		
 		// Add routes
 		cc.addRoutes(new Proxy());
 		cc.addRoutes(new ContentBased());

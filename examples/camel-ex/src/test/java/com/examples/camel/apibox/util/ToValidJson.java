@@ -1,4 +1,4 @@
-package com.examples.camel.util;
+package com.examples.camel.apibox.util;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;

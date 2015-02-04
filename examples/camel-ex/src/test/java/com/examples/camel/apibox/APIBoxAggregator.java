@@ -1,12 +1,9 @@
-package com.examples.camel;
-
-import java.util.List;
+package com.examples.camel.apibox;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
-import com.examples.camel.util.SimpleAggrStrategy;
+import com.examples.camel.apibox.util.SimpleAggrStrategy;
 
 public class APIBoxAggregator extends RouteBuilder {
 

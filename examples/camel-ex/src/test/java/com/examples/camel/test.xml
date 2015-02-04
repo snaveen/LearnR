@@ -1,9 +1,0 @@
-<routes xmlns="http://camel.apache.org/schema/spring">
-	<bean id="aggregationBean" class="com.examples.camel.Aggregation" />
-	<route id="getContent">
-		<from uri="file:hi?noop=true" />
-		<aggregate strategyRef="aggregationBean" uri="file:hii?noop=true">
-			<to uri="file:hiii" />
-		</aggregate>
-	</route>
-</routes>

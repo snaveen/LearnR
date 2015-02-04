@@ -1,8 +1,8 @@
-package com.examples.camel;
+package com.examples.camel.apibox;
 
 import org.apache.camel.builder.RouteBuilder;
 
-import com.examples.camel.util.ToValidJson;
+import com.examples.camel.apibox.util.ToValidJson;
 
 public class ContentBased extends RouteBuilder {
 	
@@ -15,6 +15,11 @@ public class ContentBased extends RouteBuilder {
 				.to("http://localhost:5000/customer?bridgeEndpoint=true&throwExceptionOnFailure=false").process(new ToValidJson())
 			.otherwise()
 				.to("http://localhost:5000/order?bridgeEndpoint=true&throwExceptionOnFailure=false").process(new ToValidJson());
+		
+		
+		from("jetty:http://0.0.0.0:8080/geo_search")
+			.to("http://localhost:5000/geolocation")
+			.to("http://localhost:5000/search");
 		
 	}
 
