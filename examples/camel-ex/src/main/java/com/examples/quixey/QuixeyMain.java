@@ -14,7 +14,7 @@ public class QuixeyMain {
 		
 		// Add routes
 		cc.addRoutes(new GeoLocEndpoint());
-		cc.addRoutes(new SearchEndpoint());
+		//cc.addRoutes(new SearchEndpoint());
 		
 
 		cc.start();
