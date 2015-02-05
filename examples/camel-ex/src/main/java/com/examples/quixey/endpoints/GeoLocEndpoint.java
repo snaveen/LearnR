@@ -7,8 +7,8 @@ import org.json.JSONObject;
 
 public class GeoLocEndpoint extends RouteBuilder {
 
-	public static final String ENDPOINT_URL = "http://localhost:8080/sdk/android/v1/geolocate";
-	public static final String MTS_URL = "http://geo-service-i-5a91fe99.us-west-1c.stage.quixey.com:10106/geodata";
+	static final String ENDPOINT_URL = "http://localhost:8080/sdk/android/v1/geolocate";
+	static final String MTS_URL = "http://geo-service-i-5a91fe99.us-west-1c.stage.quixey.com:10106/geodata";
 
 	@Override
 	public void configure() throws Exception {
