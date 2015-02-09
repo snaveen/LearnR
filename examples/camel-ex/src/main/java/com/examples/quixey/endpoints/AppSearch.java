@@ -20,28 +20,26 @@ public class AppSearch {
 			@Override
 			public void configure() throws Exception {
 				// TODO Auto-generated method stub
+
 				from(
 						"http://search-be.stage.quixey.com:8080/app_search?q=hello")
+						.process(new Transformation1())
+						.to("jetty:http://scoring-i-96b9ba5c.us-west-1c.stage.quixey.com:8778/score")
+						.setHeader(Exchange.HTTP_METHOD, constant("POST"))
 						.process(new Processor() {
 
 							@Override
 							public void process(Exchange exchange)
 									throws Exception {
 								// TODO Auto-generated method stub
-								List<String> list = new ArrayList<String>();
-								list.add("score");
-								list.add("appId");
-								JSONObject in = new JSONObject(exchange.getIn()
-										.getBody(String.class));
-								JsonProcessor js = new JsonProcessor(in, list);
-								System.out.println("@@@@@@@@@@@@@@@@@@@@ :"
-										+ js.getValues());
+								System.out.println(exchange.getIn().getBody(
+										String.class));
 							}
 						});
 			}
 		});
 		cc.start();
-		Thread.sleep(2000);
+		Thread.sleep(6000);
 		// cc.stop();
 	}
 
