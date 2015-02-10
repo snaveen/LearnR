@@ -9,7 +9,6 @@ public class RbscTransform implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		// TODO Auto-generated method stub
 		JSONObject in = new JSONObject(exchange.getIn().getBody(String.class));
 		JSONArray array = new JSONArray();
 		JSONObject out = new JSONObject();

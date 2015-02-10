@@ -9,11 +9,7 @@ public class Transformation implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		// TODO Auto-generated method stub
-
-		// System.out.println(exchange.getIn().getBody(String.class));
 		JSONObject in = new JSONObject(exchange.getIn().getBody(String.class));
-		// prepare out
 		JSONArray jList = new JSONArray();
 		JSONObject out = new JSONObject();
 		for (int i = 0; i < in.getJSONArray("results").length(); i++) {
