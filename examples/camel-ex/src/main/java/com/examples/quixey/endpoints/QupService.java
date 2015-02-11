@@ -32,15 +32,12 @@ public class QupService {
 								// TODO Auto-generated method stub
 								String body = exchange.getIn().getBody(
 										String.class);
-								//System.out.println(body);
 								JSONObject in = new JSONObject(body);
-								//System.out.println(in);
 								Transformation2 t2 = new Transformation2();
 								
-								jsa = t2.get_token_parser(
+								jsa = t2.get_token_parser(0,
 										in.getJSONObject("queryParseTree"),
 										0.0, aa);
-								System.out.println(jsa.toString());
 								exchange.getOut().setBody(jsa);
 								
 
