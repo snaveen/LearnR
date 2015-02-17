@@ -4,17 +4,16 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import com.examples.quixey.endpoints.GeoLocEndpoint;
-import com.examples.quixey.endpoints.SearchEndpoint;
 
 public class QuixeyMain {
-	
+
 	public static void main(String[] args) throws Exception {
 
 		final CamelContext cc = new DefaultCamelContext();
-		
+
 		// Add routes
 		cc.addRoutes(new GeoLocEndpoint());
-		//cc.addRoutes(new SearchEndpoint());
+		// cc.addRoutes(new SearchEndpoint());
 		
 
 		cc.start();

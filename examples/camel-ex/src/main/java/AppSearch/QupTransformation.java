@@ -10,17 +10,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class QupTransformation implements Processor {
+	private float confidence = 0;
+	private List<JSONObject> token = new ArrayList<JSONObject>();
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		// TODO Auto-generated method stub
 		JSONObject in = new JSONObject(exchange.getIn().getBody(String.class));
-		List<JSONObject> token = new ArrayList<JSONObject>();
-		float confidence = 0;
-		getTokenParser(in.getJSONObject("queryParseTree"), token, confidence);
+
+		getTokenParser(in.getJSONObject("queryParseTree"), confidence, token);
+		System.out.println(token);
+
 	}
 
-	private JSONObject transformParse(List<JSONObject> tokenParser,
+	private JSONObject transformParse(List<Object> tokenParser,
 			List<JSONObject> token, float confidence) throws JSONException {
 		// TODO Auto-generated method stub
 		JSONObject out = new JSONObject();
@@ -48,36 +51,44 @@ public class QupTransformation implements Processor {
 		return out;
 	}
 
-	private List<Object> getTokenParser(JSONObject jsonObject,
-			List<JSONObject> token, float confidence)
-			throws NumberFormatException, JSONException {
-		// TODO Auto-generated method stub
+	private List<Object> getTokenParser(JSONObject query_parse_tree,
+			float confidence1, List<JSONObject> jsonList) throws JSONException {
+		List<JSONObject> tokens = new ArrayList<JSONObject>();
+		
 
-		if (confidence == 0) {
+		if (confidence1 == 0) {
 			confidence = 1;
+		} else {
+			tokens = jsonList;
+			confidence = confidence1;
 		}
 		confidence = confidence
-				* Float.parseFloat(jsonObject.getString("edgeConfidence"));
-		if (jsonObject.has("nodeValue")) {
-			token.add(jsonObject.getJSONObject("nodeValue"));
+				* Float.parseFloat(query_parse_tree.getString("edgeConfidence"));
+		if (query_parse_tree.has("nodeValue")) {
+			tokens.add(query_parse_tree.getJSONObject("nodeValue"));
 		}
 
-		if (jsonObject.getJSONArray("childrenNodes").isNull(0)) {
-			// System.out.println("==========================");
+		if (query_parse_tree.getJSONArray("childrenNodes").isNull(0)) {
+			List<Object> temp = new ArrayList<Object>();
 			List<Object> list = new ArrayList<Object>();
-			list.add(confidence);
-			list.add(token);
+			temp.add(tokens);
+			temp.add(confidence);
+			list.add(temp);
 			return list;
 		}
-		List<Object> tokenParses = new ArrayList<Object>();
-		for (int i = 0; i < jsonObject.getJSONArray("childrenNodes").length(); i++) {
-			tokenParses.add(getTokenParser(
-					jsonObject.getJSONArray("childrenNodes").getJSONObject(i),
-					token, confidence));
 
+		List<Object> token_parses = new ArrayList<Object>();
+		for (int i = 0; i < query_parse_tree.getJSONArray("childrenNodes")
+				.length(); i++) {
+			List<JSONObject> temp_tokens = new ArrayList<JSONObject>();
+			for (int j = 0; j < tokens.size(); j++) {
+				temp_tokens.add(tokens.get(j));
+			}
+			token_parses.addAll(getTokenParser(
+					query_parse_tree.getJSONArray("childrenNodes")
+							.getJSONObject(i), confidence, temp_tokens));
 		}
-		System.out.println(tokenParses + "+++++++++++++++");
-		return tokenParses;
+		return token_parses;
 
 	}
 }

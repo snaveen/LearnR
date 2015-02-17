@@ -71,20 +71,19 @@
 			<version>${camel.version}</version>
 		</dependency>
 
-
 		<!-- -->
-		
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>1.9.13</version>
-		</dependency>
-		
 
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20090211</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-metrics</artifactId>
+			<version>${camel.version}</version>
+			<!-- use the same version as your Camel core version -->
 		</dependency>
 
 
@@ -101,8 +100,13 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>io.hawt</groupId>
+				<artifactId>hawtio-maven-plugin</artifactId>
+				<version>1.4.14</version>
+			</plugin>
 		</plugins>
+
 
 	</build>
 

@@ -8,16 +8,14 @@ import org.apache.camel.impl.DefaultCamelContext;
  *
  */
 public class App {
-	
-	
+
 	public static void main(String[] args) throws Exception {
 
 		final CamelContext cc = new DefaultCamelContext();
-		
+
 		// Add routes
 		cc.addRoutes(new Proxy());
 		cc.addRoutes(new ContentBased());
-		cc.addRoutes(new APIBoxAggregator());
 
 		cc.start();
 
@@ -45,5 +43,5 @@ public class App {
 			}
 		}
 	}
-	
+
 }

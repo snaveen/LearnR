@@ -1,21 +1,24 @@
 package com.examples.camel.apibox;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.metrics.MetricsConstants;
 
 public class ContentBased extends RouteBuilder {
 	public static Object value;
-	
+
 	@Override
 	public void configure() throws Exception {
 
 		from("jetty:http://0.0.0.0:8080/content")
-		.choice()
-			.when(header("service").isEqualTo("customer"))
+				.setHeader(MetricsConstants.HEADER_HISTOGRAM_VALUE,
+						constant(992L))
+				.to("metrics:histogram:simple.histogram?value=700")
+				.choice()
+				.when(header("service").isEqualTo("customer"))
 				.to("http://localhost:5000/customer?bridgeEndpoint=true&throwExceptionOnFailure=false")
-			.otherwise()
+				.otherwise()
 				.to("http://localhost:5000/order?bridgeEndpoint=true&throwExceptionOnFailure=false");
-		
-		
+
 	}
 
 }

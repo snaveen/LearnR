@@ -24,7 +24,6 @@ public class Transformation implements Processor {
 		}
 		out.put("funcUrls", jList);
 		out.put("baseModelName", "identity");
-		System.out.println(out);
 		exchange.getOut().setBody(out.toString());
 	}
 }
